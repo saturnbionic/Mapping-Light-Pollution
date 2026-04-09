@@ -2,24 +2,57 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Light Pollution in the Philadelphia Area</title>
+  <title>Philly Metro Light Pollution Map</title>
 
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet/dist/leaflet.css"
-  />
-  <link rel="stylesheet" href="style.css">
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+  <!-- Dark theme & map styling -->
+  <style>
+    body {
+      background-color: #0b1a36; /* navy blue */
+      color: #ffffff;            /* white text */
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      padding: 10px;
+    }
+
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+
+    .legend {
+      background: rgba(0,0,0,0.7);
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      line-height: 1.5;
+    }
+
+    /* Dark popups */
+    .leaflet-popup-content-wrapper {
+      background: #1a2a4a;
+      color: #ffffff;
+      font-size: 14px;
+    }
+
+    .leaflet-popup-tip {
+      background: #1a2a4a;
+    }
+  </style>
 </head>
 <body>
 
-  <h1>Light Pollution in the Philadelphia Metro Area</h1>
-  <p>
-    This project visualizes artificial nighttime light across Philadelphia
-    and its surrounding suburbs using satellite data.
-  </p>
-
+  <h1>Philly Metro Light Pollution Map</h1>
   <div id="map"></div>
 
+  <!-- Leaflet JS -->
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
   <script src="script.js"></script>
 </body>
