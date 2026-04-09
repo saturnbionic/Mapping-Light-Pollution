@@ -34,18 +34,27 @@ const getColor = brightness => {
   return '#ffffff';
 };
 
-// Add circle markers
-lightData.forEach(point => {
-  L.circleMarker([point.lat, point.lng], {
-    radius: 10,
-    color: getColor(point.brightness),
-    fillColor: getColor(point.brightness),
-    fillOpacity: 0.9,
-    weight: 2
-  }).addTo(map)
-    .bindPopup(`Brightness: ${point.brightness} nW/cm²/sr`);
-});
+const maxBrightness = 140; // your brightest value for normalization
 
+// Convert lightData to [lat, lng, normalizedIntensity]
+const heatData = lightData.map(d => [d.lat, d.lng, d.brightness / maxBrightness]);
+
+const heat = L.heatLayer(heatData, {
+  radius: 25,
+  blur: 15,
+  maxZoom: 17,
+  gradient: {
+    0.0: '#0b1a36',   // darkest blue
+    0.1: '#0000ff',   // blue
+    0.2: '#0080ff',   // blue-green
+    0.3: '#00ff80',   // green
+    0.4: '#ffff00',   // yellow
+    0.6: '#ffa500',   // orange
+    0.7: '#ff0000',   // red
+    0.85: '#ff69b4',  // pink
+    1.0: '#ffffff'    // brightest white
+  }
+}).addTo(map);
 // Add legend
 const legend = L.control({position: 'bottomright'});
 
