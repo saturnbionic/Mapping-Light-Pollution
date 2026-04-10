@@ -56,23 +56,24 @@ const heat = L.heatLayer(heatData, {
   }
 }).addTo(map);
 // Add legend
-const legend = L.control({position: 'bottomright'});
+const legend = L.control({ position: 'bottomright' });
 
-legend.onAdd = function(map) {
-  const div = L.DomUtil.create('div', 'info legend');
-  const grades = [0, 20, 40, 60, 80, 100, 120, 140];
-  const labels = [];
+legend.onAdd = function () {
+  const div = L.DomUtil.create('div', 'legend');
 
-  for (let i = 0; i < grades.length; i++) {
-    const from = grades[i];
-    const to = grades[i + 1] || '+';
-    const color = getColor(from + 1);
-    labels.push(
-      `<i style="background:${color}; width: 18px; height: 18px; display:inline-block; margin-right:5px;"></i> ${from}–${to}`
-    );
-  }
+  div.innerHTML = `
+    <strong>Radiance (nW/cm²/sr)</strong><br>
+    <i style="background:#0b1a36"></i> Very Dark Sky<br>
+    <i style="background:#0000ff"></i> Rural<br>
+    <i style="background:#0080ff"></i> Suburban<br>
+    <i style="background:#00ff80"></i> Urban<br>
+    <i style="background:#ffff00"></i> Bright Urban<br>
+    <i style="background:#ffa500"></i> City Core<br>
+    <i style="background:#ff0000"></i> Very Bright<br>
+    <i style="background:#ff69b4"></i> Extreme<br>
+    <i style="background:#ffffff"></i> Maximum Light
+  `;
 
-  div.innerHTML = labels.join('<br>');
   return div;
 };
 
